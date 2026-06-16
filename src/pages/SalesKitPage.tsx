@@ -36,9 +36,6 @@ export function SalesKitPage() {
       </div>
       {/* ============ COVER ============ */}
       <header className="cover">
-        <span className="eyebrow">
-          <span className="radar-dot"></span> Sales Kit · 2026
-        </span>
         <h1 className="title">
           Software <span className="accent">Radar</span>
           <br />
