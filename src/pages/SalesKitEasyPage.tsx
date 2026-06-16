@@ -37,9 +37,6 @@ export function SalesKitEasyPage() {
 
       {/* ============ COVER ============ */}
       <header className="cover">
-        <span className="eyebrow">
-          <span className="radar-dot"></span> Bản dễ đọc · 2026
-        </span>
         <h1 className="title">
           Software <span className="accent">Radar</span>
           <br />
