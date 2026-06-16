@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { ReadingModeToggle } from '../components/ReadingModeToggle';
 import { PipelineDiagram } from '../components/saleskit/PipelineDiagram';
 import { DashboardMock } from '../components/saleskit/DashboardMock';
 import { LoopDiagram } from '../components/saleskit/LoopDiagram';
@@ -30,6 +31,9 @@ export function SalesKitPage() {
 
   return (
     <div className="wrap">
+      <div className="pt-5">
+        <ReadingModeToggle />
+      </div>
       {/* ============ COVER ============ */}
       <header className="cover">
         <span className="eyebrow">

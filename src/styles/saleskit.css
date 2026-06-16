@@ -310,6 +310,35 @@
     padding: 6px 0 6px 24px;
   }
 
+  /* "Hiểu nôm na" callout — dùng ở bản dễ đọc */
+  .plain {
+    background: var(--green-wash);
+    border: 1px solid #c9ead9;
+    border-left: 4px solid var(--green);
+    border-radius: 12px;
+    padding: 13px 16px;
+    margin: 14px 0;
+    font-size: 14.5px;
+    line-height: 1.55;
+    color: var(--ink-soft);
+  }
+  .plain .plabel {
+    display: block;
+    font-size: 11.5px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: #157a52;
+    margin-bottom: 4px;
+  }
+  .plain b {
+    color: var(--ink);
+    font-weight: 600;
+  }
+  .plain + .plain {
+    margin-top: 8px;
+  }
+
   /* tables */
   .tbl-wrap {
     margin: 14px 0;
@@ -1034,9 +1063,6 @@
   }
 
   /* ---------- PRINT ---------- */
-  .no-print {
-    display: none !important;
-  }
   @media print {
     @page {
       size: A4;

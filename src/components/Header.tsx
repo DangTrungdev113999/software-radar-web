@@ -27,6 +27,9 @@ export function Header() {
           <NavLink to="/" end className={navClass}>
             Sales Kit
           </NavLink>
+          <NavLink to="/easy" className={navClass}>
+            Bản dễ đọc
+          </NavLink>
           <NavLink to="/glossary" className={navClass}>
             Từ điển thuật ngữ
           </NavLink>
