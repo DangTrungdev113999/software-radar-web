@@ -1,0 +1,25 @@
+/* ============ DESIGN TOKENS — Software Radar (clean enterprise / sáng) ============ */
+:root {
+  --paper: #fbfaf7;
+  --paper-2: #f3f1ea;
+  --ink: #0f1b2d;
+  --ink-soft: #48566b;
+  --ink-faint: #8a93a3;
+  --line: #e4e0d6;
+  --line-2: #d7d2c4;
+  --cobalt: #1e50c8;
+  --cobalt-deep: #163a93;
+  --cobalt-wash: #eaf0fd;
+  --orange: #e8663c;
+  --orange-wash: #fbede6;
+  --green: #1fa971;
+  --green-wash: #e7f6ef;
+  --yellow: #e8a93c;
+  --yellow-wash: #fbf1de;
+  --red: #d8453b;
+  --purple: #6c5ce0;
+  --purple-wash: #eeebfb;
+  --navy: #101f36;
+  --shadow: 0 1px 2px rgba(16, 31, 54, 0.04), 0 8px 28px -12px rgba(16, 31, 54, 0.18);
+  --shadow-lg: 0 2px 4px rgba(16, 31, 54, 0.05), 0 24px 60px -24px rgba(16, 31, 54, 0.3);
+}
