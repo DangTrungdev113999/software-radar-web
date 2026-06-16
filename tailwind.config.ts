@@ -51,10 +51,15 @@ export default {
           '0%': { transform: 'scale(.6)', opacity: '.7' },
           '100%': { transform: 'scale(2.1)', opacity: '0' },
         },
+        'radar-sweep': {
+          '0%': { transform: 'rotate(0deg)' },
+          '100%': { transform: 'rotate(360deg)' },
+        },
       },
       animation: {
         'fade-up': 'fade-up 600ms cubic-bezier(0.22,1,0.36,1) both',
         ping: 'ping 2.4s ease-out infinite',
+        'radar-sweep': 'radar-sweep 3.4s linear infinite',
       },
     },
   },
