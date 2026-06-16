@@ -33,6 +33,9 @@ export function Header() {
           <NavLink to="/glossary" className={navClass}>
             Từ điển thuật ngữ
           </NavLink>
+          <a href={`${import.meta.env.BASE_URL}pipeline.html`} className={navClass({ isActive: false })}>
+            Cơ chế (Pipeline)
+          </a>
         </div>
       </div>
     </nav>

@@ -1,0 +1,75 @@
+{
+  "schema_version": 1,
+  "diagram_type": "dataflow",
+  "meta": {
+    "title": "Software Radar — Cơ chế hoạt động (Pipeline)",
+    "subtitle": "Passive agentless software discovery: port-mirror → nDPI (DNS + TLS SNI) → device map → catalog match → risk → dashboard",
+    "output": "public/pipeline.html",
+    "viewBox": [1200, 780]
+  },
+  "stages": [
+    { "label": "Tap (LAN)" },
+    { "label": "Capture" },
+    { "label": "Inspect · nDPI" },
+    { "label": "Correlate & Match" },
+    { "label": "Score · Store · Present" }
+  ],
+  "nodes": [
+    { "id": "endpoints", "type": "external", "label": "Endpoints", "sublabel": "PC · BYOD · phone", "stage": 0, "row": 1, "tag": "DNS + TLS" },
+    { "id": "switch", "type": "external", "label": "Managed Switch", "sublabel": "SPAN / mirror port", "stage": 0, "row": 3, "tag": "traffic copy" },
+    { "id": "sensor", "type": "cloud", "label": "Sensor", "sublabel": "libpcap · Docker", "stage": 1, "row": 2, "tag": "out-of-band" },
+    { "id": "dns", "type": "backend", "label": "DNS Parser", "sublabel": "query names", "stage": 2, "row": 0, "tag": "UDP/53" },
+    { "id": "ndpi", "type": "backend", "label": "nDPI Engine", "sublabel": "TLS ClientHello → SNI", "stage": 2, "row": 2, "tag": "no decrypt" },
+    { "id": "flowmeta", "type": "backend", "label": "Flow Metadata", "sublabel": "src MAC/IP · ts", "stage": 2, "row": 4, "tag": "L2 / L3" },
+    { "id": "device", "type": "database", "label": "Device Registry", "sublabel": "MAC ↔ IP lease", "stage": 3, "row": 1, "tag": "identity" },
+    { "id": "catalog", "type": "database", "label": "Software Catalog", "sublabel": "domain → app patterns", "stage": 3, "row": 3, "tag": "L2 rules" },
+    { "id": "risk", "type": "security", "label": "Risk Scoring", "sublabel": "policy engine", "stage": 4, "row": 0, "tag": "green/amber/red" },
+    { "id": "store", "type": "database", "label": "Event Store", "sublabel": "metadata only", "stage": 4, "row": 2, "tag": "self-hosted" },
+    { "id": "dashboard", "type": "frontend", "label": "Dashboard", "sublabel": "Hosts · Feed · Software · Coverage", "stage": 4, "row": 4, "tag": ":8080" }
+  ],
+  "flows": [
+    { "from": "endpoints", "to": "switch", "label": "all traffic", "classification": "cleartext DNS+TLS", "variant": "default", "fromSide": "bottom", "toSide": "top", "route": "straight", "labelAt": [206, 388] },
+    { "from": "switch", "to": "sensor", "label": "mirrored copy", "classification": "out-of-band", "variant": "emphasis", "fromSide": "right", "toSide": "left" },
+    { "from": "sensor", "to": "ndpi", "label": "live packets", "classification": "passive", "variant": "emphasis", "fromSide": "right", "toSide": "left", "route": "straight" },
+    { "from": "sensor", "to": "dns", "label": "DNS pkts", "classification": "port 53", "variant": "default", "fromSide": "right", "toSide": "left" },
+    { "from": "sensor", "to": "flowmeta", "label": "headers", "classification": "5-tuple", "variant": "default", "fromSide": "right", "toSide": "left" },
+    { "from": "ndpi", "to": "catalog", "label": "SNI / domain", "classification": "fingerprint", "variant": "emphasis", "fromSide": "right", "toSide": "left", "labelAt": [678, 420] },
+    { "from": "dns", "to": "device", "label": "hostname ↔ IP", "classification": "resolve", "variant": "default", "fromSide": "right", "toSide": "left" },
+    { "from": "flowmeta", "to": "device", "label": "MAC/IP key", "classification": "attribute", "variant": "default", "fromSide": "right", "toSide": "left", "labelAt": [662, 556] },
+    { "from": "device", "to": "store", "label": "host record", "classification": "per-device", "variant": "default", "fromSide": "right", "toSide": "left", "labelAt": [884, 300] },
+    { "from": "catalog", "to": "risk", "label": "matched software", "classification": "vendor + category", "variant": "emphasis", "fromSide": "right", "toSide": "left", "labelAt": [892, 524] },
+    { "from": "catalog", "to": "store", "label": "software event", "classification": "append", "variant": "default", "fromSide": "right", "toSide": "left", "labelAt": [940, 452] },
+    { "from": "risk", "to": "store", "label": "scored event", "classification": "policy", "variant": "security", "fromSide": "bottom", "toSide": "top", "route": "straight", "labelAt": [1058, 268] },
+    { "from": "store", "to": "dashboard", "label": "query", "classification": "read", "variant": "emphasis", "fromSide": "bottom", "toSide": "top", "route": "straight", "labelAt": [1058, 496] }
+  ],
+  "cards": [
+    {
+      "dot": "emerald",
+      "title": "Đường đi chính (hot path)",
+      "items": [
+        "Tap → Capture → nDPI → Match → Dashboard, chạy trái sang phải",
+        "Sensor chỉ nhận BẢN SAO traffic qua port-mirror, không nằm inline nên không làm gián đoạn mạng",
+        "nDPI đọc TLS ClientHello để lấy SNI và DNS query — không giải mã payload"
+      ]
+    },
+    {
+      "dot": "rose",
+      "title": "Vì sao không cần agent",
+      "items": [
+        "Mọi tín hiệu lấy từ mạng (DNS + SNI), không cài gì lên máy nhân viên → hợp BYOD",
+        "Chỉ lưu metadata: domain/SNI, phần mềm match, MAC/IP, thời điểm",
+        "Risk scoring gắn nhãn green/amber/red theo policy nội bộ, không kết luận pháp lý"
+      ]
+    },
+    {
+      "dot": "orange",
+      "title": "Blind spot (giới hạn cố hữu)",
+      "items": [
+        "VPN / mobile hotspot: traffic nằm trong tunnel → không thấy SNI bên trong",
+        "DoH / DoT: DNS bị mã hoá → mất tín hiệu hostname",
+        "ECH (Encrypted ClientHello): SNI bị mã hoá → nDPI không đọc được",
+        "Crack/KMS chạy local không phát traffic ra mạng → không thấy"
+      ]
+    }
+  ]
+}
