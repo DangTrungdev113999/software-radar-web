@@ -23,7 +23,6 @@ export function ReadingModeToggle() {
           Bản dễ đọc
         </NavLink>
       </div>
-      <p className="m-0 text-[12.5px] text-ink-faint">Chọn cách đọc phù hợp với bạn</p>
     </div>
   );
 }
