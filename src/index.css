@@ -22,15 +22,181 @@
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
   }
-  /* atmospheric background */
-  body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    z-index: -2;
-    pointer-events: none;
-    background:
-      radial-gradient(900px 500px at 12% -5%, rgba(30, 80, 200, 0.06), transparent 60%),
-      radial-gradient(800px 600px at 100% 8%, rgba(232, 102, 60, 0.05), transparent 55%);
+  /* crisp white — no faded atmospheric wash (high-contrast direction) */
+}
+
+/* High-contrast overrides — MUST be after @tailwind so they win source-order */
+/* ============================================================
+   HIGH-CONTRAST EDITORIAL OVERRIDES
+   (unlayered → wins over @layer components + utilities)
+   Goal: bold black, white paper, no faded "chìm chìm" colors,
+   high readability, mobile-friendly.
+   ============================================================ */
+
+/* --- Bold structural frames on every container --- */
+.purpose-card,
+.ctx,
+.obj,
+.gcard,
+.tbl-wrap,
+.sources,
+.figure,
+.dash {
+  border-color: var(--ink);
+  border-width: 1.5px;
+}
+section.block {
+  border-top: 2px solid var(--ink);
+}
+
+/* --- Section number → solid black block --- */
+.sec-num {
+  color: #fff;
+  background: var(--ink);
+  border-color: var(--ink);
+}
+
+/* --- Eyebrow → crisp black outline --- */
+.eyebrow {
+  color: var(--ink);
+  background: #fff;
+  border-color: var(--ink);
+}
+
+/* --- Headings + diamond markers darker --- */
+h3 {
+  color: var(--ink);
+}
+h3::before {
+  background: var(--ink);
+}
+h3.alt::before {
+  background: var(--orange);
+}
+
+/* --- Quote: thick black bar, black frame, readable label --- */
+.quote {
+  border-color: var(--ink);
+  border-width: 1.5px;
+  border-left-width: 6px;
+  border-left-color: var(--ink);
+}
+.quote.orange {
+  border-left-color: var(--orange);
+}
+.quote .qlabel {
+  color: var(--ink);
+}
+
+/* --- Chips / pills → crisp black outline --- */
+.chip,
+.opill,
+.fchip {
+  border-color: var(--ink);
+  color: var(--ink);
+}
+
+/* --- Tables: solid black header bar, stronger grid --- */
+.tbl-wrap thead th {
+  background: var(--ink);
+  color: #fff;
+  border-bottom-color: var(--ink);
+  letter-spacing: 0.04em;
+}
+.tbl-wrap tbody td {
+  color: var(--ink-soft);
+  border-bottom-color: #cdcbc2;
+}
+.tbl-wrap tbody tr:nth-child(even) {
+  background: #f7f6f1;
+}
+
+/* --- Bullets / secondary text: darker, not faded --- */
+ul.clean li {
+  color: var(--ink-soft);
+}
+.muted,
+.purpose-card p,
+.lede {
+  color: var(--ink-faint);
+}
+
+/* --- Badges → solid high-contrast (no pale washes) --- */
+.b-green {
+  background: #0c6a44;
+  color: #fff;
+  border-color: #0c6a44;
+}
+.b-yellow {
+  background: #8f6410;
+  color: #fff;
+  border-color: #8f6410;
+}
+.b-red {
+  background: #b5281e;
+  color: #fff;
+  border-color: #b5281e;
+}
+.b-blue {
+  background: var(--cobalt);
+  color: #fff;
+  border-color: var(--cobalt);
+}
+
+/* --- Inline code: readable on white --- */
+.block code {
+  background: #f0eee8;
+  border-color: var(--line-2);
+  color: var(--cobalt-deep);
+}
+
+/* --- Sources rows: stronger divider --- */
+.src {
+  border-bottom-color: #cdcbc2;
+}
+
+/* ============================================================
+   EXTRA MOBILE RESPONSIVENESS
+   ============================================================ */
+@media (max-width: 760px) {
+  .wrap {
+    padding: 0 18px;
+  }
+  .cover {
+    padding: 42px 0 28px;
+  }
+  h1.title {
+    font-size: clamp(33px, 9vw, 48px);
+  }
+  .lede {
+    font-size: 16.5px;
+  }
+  section.block {
+    padding: 34px 0;
+  }
+  .sec-head {
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .quote {
+    padding: 16px 18px 16px 18px;
+    font-size: 15px;
+  }
+}
+@media (max-width: 460px) {
+  .wrap {
+    padding: 0 14px;
+  }
+  .cover {
+    padding: 34px 0 24px;
+  }
+  .dash-stats {
+    grid-template-columns: 1fr 1fr;
+  }
+  .loop {
+    grid-template-columns: 1fr;
+  }
+  .cover-meta .chip {
+    font-size: 12.5px;
   }
 }
