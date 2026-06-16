@@ -1,27 +1,25 @@
-/* ============ DESIGN TOKENS — Software Radar (HIGH-CONTRAST editorial) ============ */
-/* Đen-trắng tương phản cao, accent đậm. Không dùng màu chìm/faded. */
+/* ============ DESIGN TOKENS — Software Radar (clean enterprise / sáng) ============ */
 :root {
-  --paper: #ffffff;
-  --paper-2: #efeee9;
-  --ink: #0a0a0a;
-  --ink-soft: #1f2024;
-  --ink-faint: #494b50;
-  --line: #d3d1c8;
-  --line-2: #b4b1a6;
-  --frame: #0a0a0a;
-  --cobalt: #1540c4;
-  --cobalt-deep: #0d2c8f;
-  --cobalt-wash: #e6edfc;
-  --orange: #d6531f;
-  --orange-wash: #fbe6dc;
-  --green: #0f8a59;
-  --green-wash: #ddf0e7;
-  --yellow: #b97e0e;
-  --yellow-wash: #f8eccd;
-  --red: #cc2f24;
-  --purple: #5544c8;
-  --purple-wash: #e8e4fb;
-  --navy: #0a0a0a;
-  --shadow: 0 1px 2px rgba(0, 0, 0, 0.05), 0 6px 22px -12px rgba(0, 0, 0, 0.22);
-  --shadow-lg: 0 2px 4px rgba(0, 0, 0, 0.06), 0 22px 50px -22px rgba(0, 0, 0, 0.34);
+  --paper: #fbfaf7;
+  --paper-2: #f3f1ea;
+  --ink: #0b1422;
+  --ink-soft: #2b3545;
+  --ink-faint: #586273;
+  --line: #e4e0d6;
+  --line-2: #d7d2c4;
+  --cobalt: #1e50c8;
+  --cobalt-deep: #163a93;
+  --cobalt-wash: #eaf0fd;
+  --orange: #e8663c;
+  --orange-wash: #fbede6;
+  --green: #1fa971;
+  --green-wash: #e7f6ef;
+  --yellow: #e8a93c;
+  --yellow-wash: #fbf1de;
+  --red: #d8453b;
+  --purple: #6c5ce0;
+  --purple-wash: #eeebfb;
+  --navy: #101f36;
+  --shadow: 0 1px 2px rgba(16, 31, 54, 0.04), 0 8px 28px -12px rgba(16, 31, 54, 0.18);
+  --shadow-lg: 0 2px 4px rgba(16, 31, 54, 0.05), 0 24px 60px -24px rgba(16, 31, 54, 0.3);
 }
