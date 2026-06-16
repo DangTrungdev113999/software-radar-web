@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { ReadingModeToggle } from '../components/ReadingModeToggle';
+import { DownloadPdfButton } from '../components/DownloadPdfButton';
 import { PipelineDiagram } from '../components/saleskit/PipelineDiagram';
 import { DashboardMock } from '../components/saleskit/DashboardMock';
 import { LoopDiagram } from '../components/saleskit/LoopDiagram';
@@ -1067,6 +1068,8 @@ export function SalesKitEasyPage() {
         <div className="fbrand">Software Radar — Sales Kit (bản dễ đọc)</div>
         <div>Nhìn phần mềm qua mạng cho công ty nhỏ · không cài lên máy · chạy tại chỗ · 2026</div>
       </footer>
+
+      <DownloadPdfButton filename="Software-Radar-Ban-de-doc" />
     </div>
   );
 }

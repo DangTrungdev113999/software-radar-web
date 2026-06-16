@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { ReadingModeToggle } from '../components/ReadingModeToggle';
+import { DownloadPdfButton } from '../components/DownloadPdfButton';
 import { PipelineDiagram } from '../components/saleskit/PipelineDiagram';
 import { DashboardMock } from '../components/saleskit/DashboardMock';
 import { LoopDiagram } from '../components/saleskit/LoopDiagram';
@@ -985,6 +986,8 @@ export function SalesKitPage() {
         <div className="fbrand">Software Radar — Sales Kit</div>
         <div>Passive software visibility cho SME · agentless · self-hosted · 2026</div>
       </footer>
+
+      <DownloadPdfButton filename="Software-Radar-Sales-Kit" />
     </div>
   );
 }
